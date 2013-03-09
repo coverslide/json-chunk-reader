@@ -1,0 +1,15 @@
+{
+  "name": "json-chunk-reader",
+  "version": "0.0.0",
+  "description": "A reader for newline-separated JSON strings",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "",
+  "license": "BSD",
+  "dependencies": {
+    "mkstream": "0.0.0"
+  }
+}
