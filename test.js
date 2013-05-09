@@ -13,8 +13,6 @@ test('basic functionality', function(t){
   t.plan(12)
   
   reader.on('data', function(obj){
-    
-    //var obj = reader.read()
     offset += 1
 
     t.equal(obj.a, offset,'a offset ' + offset)
@@ -22,9 +20,10 @@ test('basic functionality', function(t){
     t.equal(obj.c, offset+2,'c offset ' + offset)
   })
 
-  reader.on('end', function(){
+  stream.on('end', function(){
     t.end()
   })
 
+  
   stream.pipe(reader)
 })
