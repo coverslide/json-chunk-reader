@@ -1,22 +1,26 @@
-require('mkstream')(JsonChunkReader)
+'use strict'
 
+var mkstream = require('mkstream')
 var jzon = require('jzon')
+
+mkstream.makeTransform(JsonChunkReader)
 
 //breaks up a stream of newline-separated JSON text into JS objects as data
 module.exports = JsonChunkReader
 
-function JsonChunkReader(){
-  this.readable=true
-  this.writable=true
+function JsonChunkReader(options){
+  options = options || {}
+  options.objectMode = true
+  mkstream.Transform.call(this, options)
   this.string = ''
   this.cursor = 0
 }
 
-JsonChunkReader.prototype.write = function(data){
-  this.string += data
+JsonChunkReader.prototype._transform = function(chunk, encoding, cb){
+  this.string += ''+chunk
   var substring = this.string.substring(this.cursor)
 
-  var slices = substring.split(/\n/g)
+  var slices = substring.split(/[\n\r]+/g)
 
   for(var i = 0,l=slices.length-1;i<l;i++){
     var slice = slices[i]
@@ -25,10 +29,7 @@ JsonChunkReader.prototype.write = function(data){
     if(data instanceof Error)
       this.emit('error', data)
     else
-      this.emit('data', data)
+      this.push(data)
   }
-}
-
-JsonChunkReader.prototype.end = function(){
-  this.emit('end')
+  cb()
 }

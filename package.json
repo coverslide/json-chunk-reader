@@ -10,7 +10,10 @@
   "author": "",
   "license": "BSD",
   "dependencies": {
-    "mkstream": "0.0.3",
+    "mkstream": "0.1.0",
     "jzon": "0.0.1"
+  },
+  "devDependencies": {
+    "tape": "~1.0.2"
   }
 }
