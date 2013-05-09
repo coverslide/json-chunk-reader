@@ -1,6 +1,7 @@
 require('mkstream')(JsonChunkReader)
 
-//TODO: modularize this
+var jzon = require('jzon')
+
 //breaks up a stream of newline-separated JSON text into JS objects as data
 module.exports = JsonChunkReader
 
@@ -17,15 +18,14 @@ JsonChunkReader.prototype.write = function(data){
 
   var slices = substring.split(/\n/g)
 
-  try{
-    for(var i = 0,l=slices.length-1;i<l;i++){
-      var slice = slices[i]
-      this.cursor += slice.length + 1
-      var data = JSON.parse(slice)
+  for(var i = 0,l=slices.length-1;i<l;i++){
+    var slice = slices[i]
+    this.cursor += slice.length + 1
+    var data = jzon.parse(slice)
+    if(data instanceof Error)
+      this.emit('error', data)
+    else
       this.emit('data', data)
-    }
-  } catch(err){
-    this.emit('error', err)
   }
 }
 

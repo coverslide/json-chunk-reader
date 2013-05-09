@@ -1,6 +1,6 @@
 {
   "name": "json-chunk-reader",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A reader for newline-separated JSON strings",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,7 @@
   "author": "",
   "license": "BSD",
   "dependencies": {
-    "mkstream": "0.0.0"
+    "mkstream": "0.0.3",
+    "jzon": "0.0.1"
   }
 }
