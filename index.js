@@ -10,6 +10,8 @@ module.exports = JsonChunkReader
 
 function JsonChunkReader(options){
   mkstream.Stream.call(this, options)
+  this.writable = true
+  this.readable = true
   this.string = ''
   this.cursor = 0
 }
