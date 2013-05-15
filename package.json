@@ -1,6 +1,6 @@
 {
   "name": "json-chunk-reader",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A reader for newline-separated JSON strings",
   "main": "index.js",
   "scripts": {

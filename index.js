@@ -33,4 +33,6 @@ JsonChunkReader.prototype.write = function(chunk){
   }
 }
 
-JsonChunkReader.prototype.end = function(){}
+JsonChunkReader.prototype.end = function(){
+  this.emit('end')
+}
